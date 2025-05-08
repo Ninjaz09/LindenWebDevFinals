@@ -1,0 +1,89 @@
+<html>
+<head>
+    <title>Sample Registration Form</title>
+</head>
+<body align = "center">   
+    <form action="#" method="post" enctype="multipart/form-data">
+        <table align = "center">      
+            <img src="C:\Users\linde\Documents\Visual Studio 2010\Templates\uc.jpg" alt="UC Logo" style="width: 100px; height: 60px;">       
+            <big style="color: red; font-size: 30px;"> Sample Registration Form Using Table </big>
+            
+            <tr>
+                <td></td>
+                <td>
+                    <input style="accent-color: gray;" type="radio" name="title" value="Mr." checked> Mr.
+                    <input style="accent-color: gray;" type="radio" name="title" value="Mrs."> Mrs.
+                    <input style="accent-color: gray;" type="radio" name="title" value="Ms."> Ms.
+                </td>
+            </tr>
+            <tr>
+                <td>First Name</td>
+                <td><input type="text" name="first_name" placeholder="First Name"></td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td><input type="text" name="last_name" placeholder="Last Name"></td>
+            </tr>
+            <tr>
+                <td>Mail Address1</td>
+                <td><input type="text" name="mail_address1"></td>
+            </tr>
+            <tr>
+                <td>Mail Address2</td>
+                <td><input type="text" name="mail_address2"></td>
+            </tr>
+            <tr>
+                <td>City</td>
+                <td><input type="text" name="city"></td>
+            </tr>
+            <tr>
+                <td>Province</td>
+                <td>
+                    <select name="province">
+                        <option value="Cebu">Cebu</option>
+                        <option value="Manila">Manila</option>
+                        <option value="Davao">Davao</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Zip</td>
+                <td><input type="text" name="zip"></td>
+            </tr>
+            <tr>
+                <td>Upload Photo</td>
+                <td><input type="file" name="photo"></td>
+            </tr>
+            <tr>
+                <td>E-Mail</td>
+                <td><input type="email" name="email" style="width: 250px;"></td>
+            </tr>
+            <tr>
+                <td>Mobile</td>
+                <td><input type="text" name="mobile" placeholder="+63"></td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top;">Languages known</td>
+                <td>
+                    <input style="accent-color: gray;" type="checkbox" name="languages" value="English" checked> English<br>
+                    <input style="accent-color: gray;" type="checkbox" name="languages" value="Cebuano" checked> Cebuano<br>
+                    <input style="accent-color: gray;" type="checkbox" name="languages" value="Illongo"> Illongo<br>
+                    <input style="accent-color: gray;" type="checkbox" name="languages" value="Ilocano"> Ilocano<br>
+                </td>
+            </tr>
+            <tr>
+                <td>Additional Information</td>
+                <td><textarea name="additional_info" placeholder="Optional"></textarea></td>
+      
+      </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="submit">
+                    <input type="reset" value="reset">
+                </td>
+            </tr>            
+        </table>
+    </form>
+</body>
+</html>

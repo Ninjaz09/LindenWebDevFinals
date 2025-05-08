@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favorite Worship Songs</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap">
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4fc3f7;
+            --dark: #1a2639;
+            --light: #f8f9fa;
+            --text: #333;
+            --text-light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: rgba(248, 249, 250, 0.8);
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        @media (min-width: 992px) {
+            .content-wrapper {
+                flex-direction: row;
+            }
+        }
+
+        .song-list-container {
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .song-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .song {
+            padding: 1rem 1.5rem;
+            background-color: rgba(74, 111, 165, 0.3);
+            border-left: 4px solid var(--accent);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .song:hover {
+            background-color: rgba(74, 111, 165, 0.5);
+            transform: translateX(5px);
+        }
+
+        .song.active {
+            background-color: var(--primary);
+            font-weight: 600;
+        }
+
+        .song-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .song-artist {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .media-container {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            background-color: #000;
+        }
+
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .lyrics-container {
+            background-color: rgba(22, 96, 136, 0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            border: 1px solid rgba(79, 195, 247, 0.1);
+        }
+
+        .lyrics-container pre {
+            white-space: pre-wrap;
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+        }
+
+        .lyrics-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .lyrics-container::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+            border-radius: 4px;
+        }
+
+        .lyrics-container::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        .now-playing {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(79, 195, 247, 0.3);
+        }
+
+        .now-playing-icon {
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .song-list-container {
+                max-width: 100%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>My Favorite Worship Songs</h1>
+            <p class="subtitle">Lyrics and videos to uplift your spirit</p>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="song-list-container">
+                <div class="song-list">
+                    <div class="song active" onclick="showSong('great-god')">
+                        <div class="song-title">Great God</div>
+                        <div class="song-artist">Lakewood Worship</div>
+                    </div>
+                    <div class="song" onclick="showSong('heres-my-life')">
+                        <div class="song-title">Here's My Life</div>
+                        <div class="song-artist">Planet Shakers</div>
+                    </div>
+                    <div class="song" onclick="showSong('eagle-wings')">
+                        <div class="song-title">Eagle Wings</div>
+                        <div class="song-artist">Hillsong</div>
+                    </div>
+                    <div class="song" onclick="showSong('carry-me')">
+                        <div class="song-title">Carry Me</div>
+                        <div class="song-artist">Hillsong</div>
+                    </div>
+                    <div class="song" onclick="showSong('good-grace')">
+                        <div class="song-title">Good Grace</div>
+                        <div class="song-artist">Hillsong</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="media-container">
+                <div class="now-playing">
+                    <i class="fas fa-music now-playing-icon"></i>
+                    <div>
+                        <div id="current-song-title">Great God</div>
+                        <div id="current-song-artist">Lakewood Worship</div>
+                    </div>
+                </div>
+                
+                <div class="video-wrapper">
+                    <video id="song-video" controls>
+                        <source src="Music/great-god.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
+                <div class="lyrics-container">
+                    <pre id="song-lyrics">
+Great are your ways
+Great are your works
+Great are you Lord in all the earth
+Great is your power
+Great is your strength
+Great are you Lord and your greatly to be praise
+Great are your ways
+Great are your works
+Great are you Lord in all the earth
+Great is your power
+Great is your strength
+Great are you Lord and your greatly to be praise
+Your greatness
+Your famous name is exhalted in all the earth
+Glory glory hallelujah
+Glory to the God of Israel
+Glory glory hallelujah
+And all the earth will sing
+That you're a great God
+Great are your ways
+Great are your works
+Great are you Lord in all the earth
+Great is your power
+Great is your strength
+Great are you Lord and your greatly to be praise
+Your greatness
+Your famous name is exhalted in all the earth
+Glory glory hallelujah
+Glory to the God of Israel
+Glory glory hallelujah
+And all the earth will sing
+That you're a great God
+we won't stop till the whole world knows
+we won't stop till the whole world knows
+we won't stop till the whole world knows
+that you're a great God, great God (5×)
+Glory glory hallelujah
+Glory to the God of Israel
+Glory glory hallelujah
+And all the earth will sing
+That you're a great God (2×)</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        // Song data
+        const songs = {
+            'great-god': {
+                title: "Great God",
+                artist: "Lakewood Worship",
+                lyrics: `Great are your ways
+Great are your works
+Great are you Lord in all the earth
+Great is your power
+Great is your strength
+Great are you Lord and your greatly to be praise
+Great are your ways
+Great are your works
+Great are you Lord in all the earth
+Great is your power
+Great is your strength
+Great are you Lord and your greatly to be praise
+Your greatness
+Your famous name is exhalted in all the earth
+Glory glory hallelujah
+Glory to the God of Israel
+Glory glory hallelujah
+And all the earth will sing
+That you're a great God
+Great are your ways
+Great are your works
+Great are you Lord in all the earth
+Great is your power
+Great is your strength
+Great are you Lord and your greatly to be praise
+Your greatness
+Your famous name is exhalted in all the earth
+Glory glory hallelujah
+Glory to the God of Israel
+Glory glory hallelujah
+And all the earth will sing
+That you're a great God
+we won't stop till the whole world knows
+we won't stop till the whole world knows
+we won't stop till the whole world knows
+that you're a great God, great God (5×)
+Glory glory hallelujah
+Glory to the God of Israel
+Glory glory hallelujah
+And all the earth will sing
+That you're a great God (2×)`,
+                video: 'Music/great-god.mp4'
+            },
+            'heres-my-life': {
+                title: "Here's My Life",
+                artist: "Planet Shakers",
+                lyrics: `Create in me
+A heart that is clean
+'Cause I want to be
+Who You want me to be
+The depths of my soul
+Are Yours, Lord, to mould
+'Cause I want to be
+Who You want me to be
+Holy Spirit fill me
+Overwhelm me
+Holy Spirit use me
+For Your glory
+Here's my life
+Let it be a living sacrifice
+All that I am
+Surrender into Your hands
+I surrender
+No matter where
+And no matter when
+Lord, I will go
+Where You want me to go
+And Holy Spirit fill me, oh
+Overwhelm me
+And Holy Spirit use me, oh
+For Your glory
+Here's my life
+Let it be a living sacrifice
+All that I am
+Surrender into Your hands
+I surrender
+Here I am
+Jesus, let Your will be done in me
+All that I am
+Surrender into Your hands
+I surrender
+I give it all
+My heart and soul
+Jesus, I'm living for You
+You have it all
+My heart and soul
+Jesus, I'm living for You
+I give it all
+My heart and soul
+Jesus, I'm living for You
+You have it all
+My heart and soul
+Jesus, I'm living for You
+Here's my life
+Let it be a living sacrifice
+All that I am
+Surrender into Your hands
+I surrender
+Here I am
+Jesus, let Your will be done in me
+All that I am
+Surrender into Your hands
+I surrender (I give it all)
+I give it all
+My heart and soul
+Jesus, I'm living for You
+You have it all
+My heart and soul
+Jesus, I'm living for You
+I give it all
+My heart and soul
+Jesus, I'm living for You
+You have it all
+My heart and soul
+Jesus, I'm living for You
+Jesus, I'm living for You
+Jesus, I'm living for You
+Jesus, I'm living for You
+Jesus, I'm living for You, God`,
+                video: 'Music/heres-my-life.mp4'
+            },
+            'eagle-wings': {
+                title: "Eagle Wings",
+                artist: "Hillsong",
+                lyrics: `Here I am waiting, abide in me, I pray
+Here I am longing for You
+Hide me in Your love, bring me to my knees
+May I know Jesus more and more
+Come live in me all my life, take over
+Come breathe in me, I will rise on eagle's wings
+Come live in me all my life, take over
+Come breathe in me, I will rise on eagle's wings
+Here I am waiting, abide in me, I pray
+Here I am longing for You
+Hide me in Your love, bring me to my knees
+May I know Jesus more and more
+Come live in me all my life, take over
+Come breathe in me, I will rise on eagle's wings
+Come live in me all my life, take over
+Come breathe in me, I will rise on eagle's wings
+Come live in me all my life, take over
+Come breathe in me, I will rise on eagle's wings
+I will rise on eagle's wings, I will rise on eagle's wings
+I will rise on eagle's wings, I will rise on eagle's wings
+I will rise on eagle's wings, I will rise on eagle's wings
+On eagle's wings`,
+                video: 'Music/eagle-wings.mp4'
+            },
+            'carry-me': {
+                title: "Carry Me",
+                artist: "Hillsong",
+                lyrics: `You lead me in to Your courts
+Surround me with Your love
+I walk with You, I do not fear
+In this place
+Dreams are made
+In this place
+Where You are
+Carry me here in Your arms of love
+Draw me close to You
+I wanna be where You are
+You carry me
+You are my strength
+I've learned to trust in You
+And once again I'm reaching out
+In this place
+Dreams are made
+In this place
+Where You are`,
+                video: 'Music/carry-me.mp4'
+            },
+            'good-grace': {
+                title: "Good Grace",
+                artist: "Hillsong",
+                lyrics: `People come together
+Strange as neighbours
+Our blood is one
+Children of generations
+Of every nation
+Of kingdom come
+Don't let your heart be troubled
+Hold your head up high
+Don't fear no evil
+Fix your eyes on this one truth
+God is madly in love with you
+So take courage
+Hold on
+Be strong
+Remember where our help comes from
+Oh-oh
+Oh-oh-oh
+Oh-oh
+Oh-oh, oh-oh, oh-oh
+Jesus
+Our redemption
+Our salvation
+Is in His blood (Hey)
+Jesus
+Light of heaven
+Friend forever
+His kingdom come
+And don't let your heart be troubled
+Hold your head up high
+Don't fear no evil
+Fix your eyes on this one truth
+God is madly in love with you
+So take courage
+Hold on
+Be strong
+Remember where our help comes from
+Oh-oh
+Oh-oh-oh
+Oh-oh
+Oh-oh, oh-oh, oh-oh
+Swing wide
+All you heavens
+Let the praise go up as the walls come down
+All creation
+Everything with breath repeat the sound
+All His children
+Clean hands pure hearts
+Good grace good God
+His name is Jesus
+Swing wide
+All you heavens
+Let the praise go up as the walls come down
+All creation
+Everything with breath repeat the sound
+All His children
+Clean hands pure hearts
+Good grace good God
+His name is Jesus
+Swing wide
+All you heavens
+Let the praise go up as the walls come down
+All creation
+Everything with breath repeat the sound
+All His children
+Clean hands pure hearts
+Good grace good God
+His name is Jesus
+Jesus
+Our redemption
+Our salvation
+Is in His blood
+Jesus
+Light of heaven
+Friend forever
+His kingdom come`,
+                video: 'Music/good-grace.mp4'
+            }
+        };
+
+        // Function to display song
+        function showSong(songId) {
+            const song = songs[songId];
+            
+            // Update now playing info
+            document.getElementById('current-song-title').textContent = song.title;
+            document.getElementById('current-song-artist').textContent = song.artist;
+            
+            // Update lyrics
+            document.getElementById('song-lyrics').textContent = song.lyrics;
+            
+            // Update video
+            const videoElement = document.getElementById('song-video');
+            videoElement.src = song.video;
+            videoElement.load();
+            
+            // Try to play automatically (may be blocked by browser)
+            videoElement.play().catch(error => {
+                console.log('Autoplay was prevented:', error);
+            });
+            
+            // Update active song in list
+            document.querySelectorAll('.song').forEach(el => el.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+
+        // Initialize with first song
+        document.addEventListener('DOMContentLoaded', function() {
+            // Default to first song
+            showSong('great-god');
+        });
+    </script>
+</body>
+</html>
